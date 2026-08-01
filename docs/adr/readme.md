@@ -1,5 +1,6 @@
-Example:
+Architecture Decision Record
 
+Example:
 ADR-001: Why We Choose Docker Compose Instead of Kubernetes
 
 Status:
