@@ -15,4 +15,22 @@ bigdata-playground/
 ├── services/
 └── scripts/
 
-2. 
+2. Documents are needed update WHEN:
+
+roadmap.md
+- changed.
+
+progress.md
+- each sprint finished.
+
+architecture.md
+- changed.
+
+adr/
+- changed.
+
+sprint-xx.md
+- each sprint finished [MOST IMPORTANT]
+
+diagrams/
+- changed.
