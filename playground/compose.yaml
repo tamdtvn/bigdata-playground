@@ -1,0 +1,9 @@
+services:
+  postgres:
+    image: postgres:18
+    environment:
+      POSTGRES_PASSWORD: postgres
+
+  python:
+    image: python:3.13
+    command: ["sleep", "infinity"]

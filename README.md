@@ -1,6 +1,12 @@
 # bigdata-playground
 
-1. Project Structure
+## 0. Study Methology
+
+- Problem → Hypothesis → Experiment → Observation → Mental Model → Documentation
+
+- Question → Prediction → Experiment → Evidence → Understanding → Code
+
+## 1. Project Structure
 
 bigdata-playground/
 ├── README.md
@@ -15,7 +21,7 @@ bigdata-playground/
 ├── services/
 └── scripts/
 
-2. Documents are needed update WHEN:
+## 2. Documents are needed update WHEN:
 
 roadmap.md
 - changed.

@@ -1,4 +1,4 @@
-Architecture Decision Record
+ADR - Architecture Decision Record - ADR
 
 Example:
 ADR-001: Why We Choose Docker Compose Instead of Kubernetes
