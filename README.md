@@ -17,9 +17,15 @@ bigdata-playground/
 │   ├── progress.md
 │   └── adr/
 ├── datasets/
-├── notebooks/
+├── playground/
 ├── services/
 └── scripts/
+
+datasets/     → kho nguyên liệu
+services/     → nhà máy
+playground/   → khu thử nghiệm
+scripts/      → dụng cụ vận hành
+docs/         → bản đồ + hồ sơ thiết kế
 
 ## 2. Documents are needed update WHEN:
 

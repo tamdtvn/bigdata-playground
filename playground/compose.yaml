@@ -3,7 +3,23 @@ services:
     image: postgres:18
     environment:
       POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: playground
+    volumes:
+      - postgres-data:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d playground"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
 
-  python:
-    image: python:3.13
-    command: ["sleep", "infinity"]
+  ingestion:
+    build:
+      context: ../services/ingestion
+    volumes:
+      - ../datasets:/data:ro
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+volumes:
+  postgres-data:
