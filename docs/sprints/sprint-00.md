@@ -1,19 +1,18 @@
-Goal
+# Sprint 0 – Prepare Environment
+
+### Goal
 - Prepare development environment.
 
-Tasks
-✔ Repository
-✔ README
-✔ Docker Compose
-✔ ADR Folder
+### Tasks
+* Repository
+* README
+* Docker Compose
+* Documentation Structure
 
-Definition of Done
-✔ Repository created.
-✔ Folder structure completed.
-✔ Initial documentation exists.
+### Definition of Done
+* Repository created.
+* Documentation Structure folder completed.
+* Initial documentation exists.
 
-Lessons Learned
-✔ Prepare architecture before implementation.
-
-Next Sprint
-- Docker
+### Lessons Learned
+* Prepare architecture before implementation.

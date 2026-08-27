@@ -35,3 +35,24 @@ Sprint 1 – Docker Foundation
 │
 └── Session 5
     └── Docker Network & Compose
+
+## = 2026-08-16
+
+### Sprint 2: 5 sessions
+
+Sprint 2 – Data Engineering Foundation
+│
+├── Session 6
+│   └── PostgreSQL & Persistent Storage
+│
+├── Session 7
+│   └── Port Publishing & System Boundaries
+│
+├── Session 8
+│   └── First Data Pipeline
+│
+├── Session 9
+│   └── Pipeline Reliability
+│
+└── Session 10
+    └── Architecture Review & Ingestion Performance

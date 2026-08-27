@@ -1,34 +1,35 @@
 # Sprint 1 – Docker Fundamentals
 
 ## Goal
-Understand why Docker exists.
+* Understand why Docker exists.
 
 ## Sessions
 
 ### Session 1 – Why Docker Exists
 
-Learned:
+#### Learned:
 - Environment Drift
 - Reproducible Environment
 - Docker standardizes application environments.
 
-Lessons Learned:
+#### Lessons Learned:
 - Technology should be understood through the problem it solves.
 
 ### Session 2 – Image vs Container
 
-Learned:
+#### Learned:
 - Docker Image is a packaged environment/artifact.
 - Container is a running instance of an image.
 - Multiple containers can be created from the same image.
 - Changes inside one container do not automatically change other containers.
 - Images should be treated as immutable artifacts.
 
-Key Insight:
+#### Key Insight:
 - Dockerfile: describes how to build an Image. 
 - Image: is the built artifact/template. 
 - Container: is a runtime instance of Image.
 - Workflow:
+
                     ┌──────────────┐
                     │ Dockerfile   │
                     └──────┬───────┘
@@ -54,18 +55,23 @@ Key Insight:
                     │  Container   │
                     └──────────────┘
 
+
 ### Docker Desktop
-| Thành phần        | Vai trò                                    |
+
+#### Docker Desktop includes:
+
+| Item              | Role                                       |
 | ----------------- | ------------------------------------------ |
-| **Docker CLI**    | Nhận command từ chúng ta                   |
-| **Docker Engine** | Thực hiện việc build/run/manage containers |
-| **Docker Image**  | Artifact dùng để tạo container             |
+| **Docker CLI**    | Receive command from us                    |
+| **Docker Engine** | Implement build/run/manage containers      |
+| **Docker Image**  | Artifact is to create container            |
 | **Container**     | Runtime instance                           |
+
 
 ### Session 3 – Dockerfile & Image Layers
 
 #### Goal
-Build the first custom Docker image and understand build cache.
+* Build the first custom Docker image and understand build cache.
 
 #### Key Lessons
 - Dockerfile defines image build instructions.
@@ -78,12 +84,12 @@ Build the first custom Docker image and understand build cache.
 - Put stable dependencies before frequently changing application code.
 
 #### Key Insight
-Dockerfile order affects build efficiency.
+* Dockerfile order affects build efficiency.
 
 ### Session 4 – Build Context & .dockerignore
 
 #### Goal
-Understand Docker build context and control which files are available during build.
+* Understand Docker build context and control which files are available during build.
 
 #### Learned
 - `.` specifies the build context.
@@ -95,7 +101,7 @@ Understand Docker build context and control which files are available during bui
 - Build context affects performance, security, and maintainability.
 
 #### Experiment
-Verified that:
+* Verified that:
 - Files in the build context can be copied into an image.
 - Files excluded by `.dockerignore` cannot be copied.
 - Container filesystem reflects what was included in the image.
@@ -104,8 +110,8 @@ Verified that:
 
 #### Goal
 
-Understand how multiple Docker containers communicate and introduce
-Docker Compose as a way to define a multi-container application.
+* Understand how multiple Docker containers communicate and introduce
+* Docker Compose as a way to define a multi-container application.
 
 #### Learned
 
@@ -133,10 +139,9 @@ Docker Compose as a way to define a multi-container application.
 
 #### Key Insight
 
-Applications should depend on stable service names rather than ephemeral container IP addresses.
+* Applications should depend on stable service names rather than ephemeral container IP addresses.
 
-Docker Compose allows us to describe the desired multi-container environment declaratively instead of manually running and connecting
-individual containers.
+* Docker Compose allows us to describe the desired multi-container environment declaratively instead of manually running and connecting individual containers.
 
 #### Definition of Done
 

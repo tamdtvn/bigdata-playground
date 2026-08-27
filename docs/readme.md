@@ -1,4 +1,4 @@
-The structure:
+# The structure:
 
 docs/
 │
@@ -18,7 +18,7 @@ docs/
 └── diagrams/           ← Draw.io, Mermaid, PNG...
 
 
-Quy tắc chung:
+# General Principles:
 
 | File                   | Vai trò          | Tần suất            |
 | ---------------------- | ---------------- | ------------------- |
