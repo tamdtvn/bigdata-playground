@@ -1,29 +1,31 @@
-# Validate Compose configuration
-docker compose config
+# Session 09 - Pipeline Reliability
 
-# Start/recreate PostgreSQL
-docker compose up -d --force-recreate postgres
+## Validate Compose configuration
+    docker compose config
 
-# Check health status
-docker compose ps
+## Start/recreate PostgreSQL
+    docker compose up -d --force-recreate postgres
 
-# Bring the whole system up and rebuild
-docker compose up --build
+## Check health status
+    docker compose ps
 
-# Run ingestion as a one-off job
-docker compose run --rm ingestion
+## Bring the whole system up and rebuild
+    docker compose up --build
 
-# Rebuild and run the ingestion job
-docker compose run --rm --build ingestion
+## Run ingestion as a one-off job
+    docker compose run --rm ingestion
 
-# Inspect PostgreSQL logs
-docker compose logs postgres
+## Rebuild and run the ingestion job
+    docker compose run --rm --build ingestion
 
-# Inspect ingestion logs
-docker compose logs ingestion
+## Inspect PostgreSQL logs
+    docker compose logs postgres
 
-docker compose up
-→ Bring the SYSTEM up.
+## Inspect ingestion logs
+    docker compose logs ingestion
 
-docker compose run --rm ingestion
-→ Run the JOB once.
+    docker compose up
+    → Bring the SYSTEM up.
+
+    docker compose run --rm ingestion
+    → Run the JOB once.

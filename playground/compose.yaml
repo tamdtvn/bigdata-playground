@@ -34,5 +34,13 @@ services:
       - ../datasets:/data:ro
       - ../datasets/processed:/output
 
+  data-generator:
+    image: python:3.13
+    working_dir: /scripts
+    volumes:
+      - ../scripts:/scripts:ro
+      - ../datasets:/output
+    command: python generate_partition_orders.py
+
 volumes:
   postgres-data:

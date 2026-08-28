@@ -1,16 +1,16 @@
-ADR-001 – Repository Structure
+# ADR-001 – Repository Structure
 
-Status
-✔ Accepted
+## Status
++ Accepted
 
-Context
-✔ We need a repository that will evolve over many months while keeping
+## Context
++ We need a repository that will evolve over many months while keeping
 documentation, datasets, notebooks, services, and infrastructure organized.
 
-Decision
-✔ Create a clean project structure before implementing any functionality.
+## Decision
++ Create a clean project structure before implementing any functionality.
 
-Consequences
+## Consequences
 + Easy to navigate
 + Easy to scale
 + Documentation grows with the project

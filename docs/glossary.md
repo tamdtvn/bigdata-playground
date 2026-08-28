@@ -138,3 +138,61 @@ An operation either completes entirely or has no committed effect.
 
 An intermediate area where incoming data can be loaded, validated,
 cleaned, or transformed before reaching its final destination.
+
+## Columnar Storage
+→ "Đặt dữ liệu cùng column gần nhau để analytics đọc hiệu quả."
+
+## Column Pruning
+→ "Không cần column nào thì đừng đọc column đó."
+
+## Data Skipping
+→ "Biết block không chứa thứ cần tìm thì bỏ qua cả block."
+
+## Row Group
+→ "Chia Parquet thành các khối để có thể xử lý và skip theo khối."
+
+## Schema
+→ "File tự biết dữ liệu của nó có cấu trúc và kiểu gì."
+
+## Metadata
+→ "Thông tin về dữ liệu giúp engine quyết định trước khi đọc dữ liệu."
+
+## Crossover Point
+→ "Điểm mà lợi ích của optimization bắt đầu lớn hơn chi phí của nó."
+
+## Partitioning
+Physically organizes a dataset into subsets based on partition keys.
+→ "Chia dataset theo cách business thường truy cập."
+
+## Partition Key
+The field used to determine which partition contains data.
+→ "Column dùng để quyết định data nằm ở partition nào."
+
+## Partition Granularity
+How finely a dataset is divided into partitions.
+→ "Chia data thô hay mịn đến mức nào."
+
+## Partition Cardinality
+The number of distinct partitions produced by a partition strategy.
+→ "Partition key tạo ra bao nhiêu partitions."
+
+## Partition Pruning
+Skipping partitions that cannot satisfy a query predicate.
+→ "Query bỏ cả partition không cần đọc."
+
+## Partition Selectivity
+How effectively a query predicate eliminates unnecessary partitions.
+→ "Query loại bỏ được bao nhiêu partitions."
+
+## Small Files Problem
+Performance and operational overhead caused by splitting data into
+too many small files.
+→ "Quá nhiều file nhỏ khiến overhead lớn hơn lợi ích chia nhỏ."
+
+## Partition Invariant
+The requirement that data physically stored in a partition must actually satisfy that partition's value.
+→ "Partition nói data thuộc đâu thì data bên trong phải thực sự thuộc đó."
+
+## Diminishing Returns
+The point where additional optimization cost produces progressively smaller benefits.
+→ "Tốn thêm rất nhiều nhưng chỉ nhận thêm một ít." [Hiệu suất giảm dần]
