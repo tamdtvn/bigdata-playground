@@ -56,3 +56,45 @@ Sprint 2 – Data Engineering Foundation
 │
 └── Session 10
     └── Architecture Review & Ingestion Performance
+
+## = 2026-08-22
+
+### Sprint 3: 5 sessions
+
+Sprint 3 — Data Storage & Processing Foundations
+│
+├── Session 11
+│   └── CSV vs Parquet
+│
+├── Session 12
+│   └── Partitioning
+│
+├── Session 13
+│   └── Predicate Pushdown & Data Skipping
+│
+├── Session 14
+│   └── Data Lake Foundations
+│
+└── Session 15
+    └── Sprint Review & Scaling Foundations   
+
+## = 2026-08-31    
+
+### Sprint 4: 5 sessions
+
+Sprint 4 — Distributed Processing Foundations
+
+Session 16 — Why Distributed Processing?
+             Partition → Task → Worker
+
+Session 17 — Spark Fundamentals
+             Driver / Executor / Job / Stage / Task
+
+Session 18 — Distributed Aggregation
+             Shuffle
+
+Session 19 — Failure & Parallelism
+             Retry / Partition / Worker Failure
+
+Session 20 — Sprint Review
+             Single Machine vs Distributed Processing

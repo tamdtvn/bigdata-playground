@@ -112,6 +112,29 @@
        │
        └── Optimization worth using when?
               └── Crossover Point     
+
+       Data Storage
+       │
+       ├── Transaction workload
+       │      └── OLTP
+       │
+       ├── Large analytical storage
+       │      └── Data Lake
+       │
+       ├── Separate processing from persistence
+       │      └── Storage–Compute Decoupling
+       │
+       ├── Data lifecycle
+       │      └── Data Zones
+       │             ├── Raw
+       │             ├── Cleaned
+       │             └── Curated
+       │
+       ├── Rebuild data from source
+       │      └── Reprocessability
+       │
+       └── Unmanaged lake
+              └── Data Swamp
                   
 
        Data Layout
@@ -142,3 +165,105 @@
        │
        └── Optimization trade-off
               └── Diminishing Returns
+
+       Query Performance
+       │
+       ├── Avoid partitions
+       │      └── Partition Pruning
+       │
+       ├── Avoid blocks
+       │      └── Data Skipping
+       │
+       ├── Avoid columns
+       │      └── Column Pruning
+       │
+       ├── Move filter toward storage
+       │      └── Predicate Pushdown
+       │
+       ├── Describe blocks
+       │      └── Row Group Statistics
+       │
+       ├── Arrange values physically
+       │      └── Physical Ordering
+       │
+       └── Optimize progressively
+              └── Layered Optimization
+
+       Data Lake
+       │
+       ├── Source truth
+       │      └── Raw Zone
+       │
+       ├── Trusted data
+       │      └── Cleaned Zone
+       │
+       ├── Business-ready data
+       │      └── Curated Zone
+       │
+       ├── Trust boundary
+       │      └── Data Contract
+       │
+       ├── Rebuild from source
+       │      └── Reprocessability
+       │
+       └── Safe visibility
+              └── Atomic Publish  
+
+
+       Big Data Storage & Processing
+       │
+       ├── Efficient analytical format
+       │      └── Parquet
+       │
+       ├── Avoid irrelevant files
+       │      └── Partition Pruning
+       │
+       ├── Avoid irrelevant blocks
+       │      └── Data Skipping
+       │
+       ├── Avoid irrelevant columns
+       │      └── Column Pruning
+       │
+       ├── Push filtering toward storage
+       │      └── Predicate Pushdown
+       │
+       ├── Organize values for workload
+       │      └── Physical Ordering
+       │
+       ├── Separate storage from processing
+       │      └── Storage–Compute Decoupling
+       │
+       ├── Manage data lifecycle
+       │      └── Data Zones
+       │
+       ├── Protect trusted data
+       │      └── Data Contract
+       │
+       ├── Rebuild derived data
+       │      └── Reprocessability
+       │
+       └── Handle increasing workload
+              ├── Scale Up
+              └── Scale Out   
+
+
+## Week 2 - 31/08/2026
+
+       Scale Problem
+       │
+       ├── Unnecessary data
+       │      ├── Partition Pruning
+       │      ├── Data Skipping
+       │      └── Column Pruning
+       │
+       ├── Filtering too late
+       │      └── Predicate Pushdown
+       │
+       ├── Poor physical organization
+       │      └── Physical Layout / Ordering
+       │
+       ├── Single-machine capacity
+       │      └── Scale Up
+       │
+       └── Single-machine limit
+              └── Scale Out                                     

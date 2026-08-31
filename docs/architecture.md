@@ -138,3 +138,90 @@ This layout was selected based on measured daily, monthly, and yearly analytical
 Monthly partitioning balances query pruning effectiveness with partition/file-management overhead.
 
 See ADR-002 for evidence and rationale.
+
+## Data Lake
+Data Lake chủ yếu giải quyết: Storage decoupled from compute [Storage–Compute Decoupling].
+
+                DATA PRODUCERS
+
+       Application      IoT       Logs      APIs
+              │            │          │         │
+              └────────────┴────┬─────┴─────────┘
+                                ▼
+                     ┌─────────────┐
+                     │             │
+                     │  DATA LAKE  │
+                     │             │
+                     │ CSV         │
+                     │ JSON        │
+                     │ Parquet     │
+                     │ Logs        │
+                     │ ...         │
+                     └──────┬──────┘
+                             │
+              ┌──────────────┼──────────────┐
+              ▼              ▼              ▼
+       SQL            Spark            ML
+       Analytics       Processing       Training
+
+### Folder Structure
+
+       data/
+       ├── lake/
+       │   ├── raw/
+       │   │   └── orders/
+       │   │       └── orders-partition.csv
+       │   │
+       │   ├── cleaned/
+       │   │   └── orders/
+       │   │       └── orders.parquet
+       │   │
+       │   └── curated/
+       │       ├── daily_revenue/
+       │       └── monthly_revenue/
+       │
+       └── experiments/
+       ├── non_partitioned/
+       ├── by_day/
+       ├── by_month/
+       ├── pushdown/
+       └── pushdown_sorted/
+
+### Data Lake Foundation
+
+                    BUSINESS WORKLOAD
+                           │
+                           ▼
+                       DATA LAKE
+                           │
+                           ▼
+                        PARQUET
+                           │
+              ┌────────────┼────────────┐
+              ▼            ▼            ▼
+         Partition      Row Groups    Columns
+              │            │            │
+              ▼            ▼            ▼
+          Pruning       Skipping      Pruning
+              │            │            │
+              └────────────┼────────────┘
+                           ▼
+                    LESS DATA READ
+                           │
+                           ▼
+                     PERFORMANCE
+                           │
+                           ▼
+                    DATA KEEPS GROWING
+                           │
+                           ▼
+                  SINGLE MACHINE LIMIT?
+                           │
+                    ┌──────┴──────┐
+                    │             │
+                   NO            YES
+                    │             │
+              keep simple     Scale Out?
+                                  │
+                                  ▼
+                       DISTRIBUTED PROCESSING

@@ -195,3 +195,251 @@ See ADR-002.
 - [x] Evaluate trade-offs
 - [x] Select partition strategy
 - [x] Record architectural decision
+
+
+## Session 13 — Predicate Pushdown & Data Skipping
+
+### Goal
+
+Understand how query predicates interact with physical Parquet layout.
+
+### Experiment
+
+Used the same 1,000,000-order dataset with 10 Parquet row groups.
+
+Two predicates were compared:
+
+- `order_id > 900000`
+- `amount > 900`
+
+The original data was physically ordered by `order_id`.
+
+Row-group statistics showed:
+
+- `order_id` ranges were separated across row groups.
+- `amount` ranges overlapped across all row groups.
+
+### Initial Benchmark
+
+| Predicate | After Read | Pushdown |
+| --- | ---: | ---: |
+| order_id > 900000 | 0.062166s | 0.006015s |
+| amount > 900 | 0.028452s | 0.027473s |
+
+`order_id` allowed 9 of 10 row groups to be skipped.
+
+`amount` could not eliminate row groups because its values were
+distributed across all row groups.
+
+### Physical Ordering Experiment
+
+The same dataset was sorted by `amount` and rewritten with the same
+10-row-group layout.
+
+This changed row-group statistics:
+
+- `amount` became strongly separated between row groups.
+- `order_id` became distributed across row groups.
+
+### Second Benchmark
+
+| Predicate | After Read | Pushdown |
+| --- | ---: | ---: |
+| order_id > 900000 | 0.068777s | 0.021306s |
+| amount > 900 | 0.028382s | 0.006205s |
+
+### Key Insights
+
+Predicate Pushdown does not automatically produce Data Skipping.
+
+Effective Data Skipping depends on the relationship between:
+
+- Query predicates
+- Physical data layout
+- Data distribution
+- Row-group statistics
+
+Physical ordering can improve one access pattern while making another
+less efficient.
+
+### Principle
+
+**Design data layout from access patterns, not from technology.**
+
+### Definition of Done
+
+- [x] Understand Predicate Pushdown
+- [x] Understand Row Group Statistics
+- [x] Observe effective and ineffective Data Skipping
+- [x] Compare Filter After Read vs Pushdown
+- [x] Change physical ordering
+- [x] Observe query-performance impact
+- [x] Connect physical layout to query workload
+
+## Session 14 — Data Lake Foundations
+
+### Goal
+
+Understand why a Data Lake exists and implement a minimal data lifecycle.
+
+### Architecture
+
+data/
+├── lake/
+│   ├── raw/
+│   │   └── orders/
+│   ├── cleaned/
+│   │   └── orders/
+│   └── curated/
+│       ├── daily_revenue/
+│       └── monthly_revenue/
+└── experiments/
+
+### Pipeline
+
+Raw Orders
+    ↓
+Validate + Clean + Convert
+    ↓
+Cleaned Orders
+    ↓
+Aggregate
+    ├── Daily Revenue
+    └── Monthly Revenue
+
+### Evidence
+
+Raw:
+- 1,000,000 orders
+
+Cleaned:
+- 1,000,000 validated orders in Parquet
+
+Curated:
+- 365 daily revenue rows
+- 12 monthly revenue rows
+
+Invalid `amount=ABC` was rejected before reaching the Cleaned zone.
+
+The original Raw data remained available for reprocessing.
+
+### Key Insights
+
+- Raw preserves source truth.
+- Cleaned contains trusted data.
+- Curated serves specific business needs.
+- Data Contracts protect trust boundaries.
+- Keeping Raw data enables reprocessing.
+- Failed processing can leave stale previous outputs.
+- Atomic Publish can prevent consumers from seeing incomplete output.
+
+### Principle
+
+**Preserve source truth, validate before trust, publish only valid data.**
+
+### Definition of Done
+
+- [x] Understand Data Lake purpose
+- [x] Understand Storage–Compute Decoupling
+- [x] Implement Raw / Cleaned / Curated zones
+- [x] Implement Raw → Cleaned transformation
+- [x] Implement Cleaned → Curated transformation
+- [x] Test invalid data
+- [x] Demonstrate Data Contract enforcement
+- [x] Understand Reprocessability
+- [x] Identify stale-output risk
+
+### Data FLow Processing BEFORE Scale Out
+
+    Business Workload
+        ↓
+    Data Lake / Data Zones
+        ↓
+    Choose efficient format
+        ↓
+    Organize physical layout
+        ↓
+    Partition Pruning + Data Skipping + Column Pruning + Predicate Pushdown
+        ↓
+    Process less data
+        ↓
+    Measure against SLA
+        ↓
+    Optimize / Scale Up
+        ↓
+    Still insufficient
+        ↓
+    Scale Out
+
+    Summary: Workload → Layout → Less Work → Measure → Scale only when necessary.
+
+
+## Session 15 — Sprint Review & Scaling Foundations
+
+### Goal
+
+Understand when increasing data volume becomes a distributed-processing problem rather than an optimization problem.
+
+### Scaling Decision Model
+
+    Business Workload
+        ↓
+    Optimize Data Layout
+        ↓
+    Process Less Data
+        ↓
+    Measure Against SLA
+        ↓
+    Scale Up if sufficient
+        ↓
+    Still insufficient?
+        ↓
+    Scale Out
+
+### Key Insights
+
+- Large data does not automatically require distributed processing.
+- Reduce unnecessary work before adding compute.
+- Scale Up is simpler than Scale Out and should be considered first.
+- Scale Out introduces distributed-system complexity.
+- Distributed processing becomes justified when an optimized
+  single-machine solution can no longer satisfy workload requirements.
+
+### Principle
+
+**Before adding compute, reduce unnecessary work.**
+
+Or:
+
+**Workload → Layout → Less Work → Measure → Scale only when necessary.**
+
+### Definition of Done
+
+- [x] Understand Scale Up
+- [x] Understand Scale Out
+- [x] Understand why Scale Out adds complexity
+- [x] Connect scaling decisions to workload and SLA
+- [x] Identify when distributed processing becomes justified   
+
+
+## Sprint 3 — Data Storage & Processing Foundations ✅
+
+Completed:
+
+- CSV vs Parquet
+- Column Pruning
+- Row Groups
+- Partitioning
+- Partition Pruning
+- Predicate Pushdown
+- Data Skipping
+- Physical Ordering
+- Data Lake Foundations
+- Raw / Cleaned / Curated zones
+- Data Contracts
+- Reprocessability
+- Scale Up vs Scale Out
+
+### Sprint Principle
+
+**Workload → Layout → Less Work → Measure → Scale only when necessary.**

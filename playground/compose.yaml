@@ -33,6 +33,9 @@ services:
     volumes:
       - ../datasets:/data:ro
       - ../datasets/processed:/output
+      - ../data/lake/raw:/lake/raw:ro
+      - ../data/lake/cleaned:/lake/cleaned
+      - ../data/lake/curated:/lake/curated
 
   data-generator:
     image: python:3.13

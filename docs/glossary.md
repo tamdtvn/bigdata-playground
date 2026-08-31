@@ -196,3 +196,64 @@ The requirement that data physically stored in a partition must actually satisfy
 ## Diminishing Returns
 The point where additional optimization cost produces progressively smaller benefits.
 → "Tốn thêm rất nhiều nhưng chỉ nhận thêm một ít." [Hiệu suất giảm dần]
+
+## Partition Pruning
+→ "Không cần partition thì đừng mở."
+
+## Data Skipping
+Avoiding physical data blocks that cannot satisfy a query predicate.
+→ "Không cần block thì đừng đọc."
+
+## Column Pruning
+→ "Không cần column thì đừng đọc."
+
+## Predicate Pushdown
+Moves filtering conditions closer to the data reader so unnecessary data can potentially be avoided.
+→ "Lọc càng gần data càng tốt."
+
+## Layered Optimization
+Reducing unnecessary work progressively across multiple data-access layers.
+→ "Mỗi tầng cùng loại bỏ một phần công việc không cần thiết."
+
+## Predicate Pushdown
+→ "Đưa filter xuống gần data."
+
+## Row Group Statistics
+Metadata such as min/max values describing data inside a Parquet row group.
+→ "Metadata giúp biết block có khả năng chứa kết quả không."
+
+## Physical Ordering
+Organizing related values close together physically so metadata can better eliminate unnecessary data.
+→ “Đặt những giá trị liên quan gần nhau để metadata có thể giúp engine bỏ data không cần đọc.”
+
+## Data Lake
+Storage for large volumes of data in multiple formats, decoupled from processing engines.
+
+## Data Zone
+A storage boundary representing a stage in the data lifecycle.
+
+## Data Contract
+Rules data must satisfy before consumers can trust it.
+
+## Reprocessability
+Ability to rebuild derived data from preserved source data.
+
+## Data Product
+A dataset designed for a clear consumer or business need.
+
+## Atomic Publish
+Expose new output to consumers only after processing and validation succeed.
+
+## Scale Up
+Increase the capacity of a single machine.
+
+## Scale Out
+Increase processing capacity by distributing work across multiple machines.
+
+## SLA
+A measurable service requirement, such as completing a daily processing
+job within 30 minutes.
+
+## Distributed Processing
+Splitting data and computation across multiple workers to process a
+workload together.
