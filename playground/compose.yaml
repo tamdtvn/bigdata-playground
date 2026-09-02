@@ -45,5 +45,12 @@ services:
       - ../datasets:/output
     command: python generate_partition_orders.py
 
+  spark:
+    image: apache/spark:4.0.1
+    volumes:
+      - ../data:/data
+      - ../services/spark:/app
+    working_dir: /app  
+
 volumes:
   postgres-data:

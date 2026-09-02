@@ -14,6 +14,7 @@ flowchart LR
         Python --- Network
         Postgres --- Network
         Postgres -->|mount| Volume
+        
     end
 
     Dev --> Compose

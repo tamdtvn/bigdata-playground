@@ -267,3 +267,47 @@
        │
        └── Single-machine limit
               └── Scale Out                                     
+
+
+       Distributed Processing
+       │
+       ├── Divide data
+       │      └── Processing Partition
+       │
+       ├── Execute partition
+       │      └── Task
+       │
+       ├── Run tasks
+       │      └── Worker
+       │
+       ├── Run work simultaneously
+       │      └── Parallelism
+       │
+       ├── Uneven work
+       │      └── Data Skew
+       │
+       └── Partition granularity
+              └── Parallelism ↔ Overhead trade-off
+
+       Spark Application
+       │
+       ├── Coordinate execution
+       │      └── Driver
+       │
+       ├── Execute work
+       │      └── Executor
+       │
+       ├── Describe computation
+       │      └── Transformation
+       │
+       ├── Demand result
+       │      └── Action
+       │
+       ├── Delay execution
+       │      └── Lazy Evaluation
+       │
+       └── Execution hierarchy
+              └── Job
+                     └── Stage
+                            └── Task
+                                   └── Partition              

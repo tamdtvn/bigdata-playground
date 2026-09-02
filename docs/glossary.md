@@ -255,5 +255,43 @@ A measurable service requirement, such as completing a daily processing
 job within 30 minutes.
 
 ## Distributed Processing
-Splitting data and computation across multiple workers to process a
-workload together.
+Splitting data and computation across multiple workers to process a workload together.
+
+## Processing Partition
+A portion of a dataset that can be processed independently.
+
+## Task
+A unit of computation that processes one partition.
+
+## Worker
+A compute resource that executes tasks.
+
+## Parallelism
+The amount of work that can execute simultaneously.
+
+## Data Skew
+Uneven distribution of data or work that causes some tasks to take significantly longer than others.
+
+## Driver
+The process that coordinates a Spark application and plans execution.
+
+## Executor
+A process that executes tasks and processes data for a Spark application.
+
+## Transformation
+An operation that describes a new computation without necessarily
+executing it immediately.
+
+## Action
+An operation that requires Spark to execute computation and produce
+a result.
+
+## Lazy Evaluation
+Delaying execution so Spark can understand and optimize a chain of
+operations before running it.
+
+## Physical Plan
+Spark's selected execution strategy for performing a computation.
+
+## Column Pruning
+Reading only the columns required by a query.
