@@ -225,3 +225,53 @@ Data Lake chủ yếu giải quyết: Storage decoupled from compute [Storage–
                                   │
                                   ▼
                        DISTRIBUTED PROCESSING
+
+
+
+## Processing Efficiency Principle
+
+The system should avoid unnecessary work at every processing layer:
+
+- Storage: avoid reading unnecessary data.
+- Processing: avoid unnecessary computation.
+- Distributed execution: avoid unnecessary data movement.
+- Scheduling: avoid unnecessary parallel work.
+
+**Process less. Move less. Coordinate less.**
+
+
+## Distributed Reliability Principle
+
+Reliability is not the absence of failure.
+
+The system should contain failures and recover the smallest practical
+unit of work at reasonable cost.
+
+Partition design affects:
+
+- parallelism
+- scheduling overhead
+- skew sensitivity
+- recovery granularity
+
+
+## Scaling Decision Principle
+
+Distributed processing is not selected because data is "big."
+
+Scaling decisions should start from business requirements and
+quality attributes.
+
+Decision order:
+
+    Understand workload
+        ↓
+    Reduce unnecessary work
+        ↓
+    Measure against SLA
+        ↓
+    Optimize / reasonable Scale Up
+        ↓
+    Scale Out only when justified
+
+Technology must justify itself by the problem it solves.

@@ -49,8 +49,14 @@ group_query.explain("formatted")
 
 print("\n=== GROUP BY RESULT ===")
 
-group_query.orderBy("product").show(
-    truncate=False
-)
+# group_query.orderBy("product").show(truncate=False)
+
+results = group_query.collect()
+
+for row in sorted(results, key=lambda r: r["product"]):
+    print(row)
+
+print("\n=== FINAL GROUP BY PLAN ===")
+group_query.explain("formatted")
 
 spark.stop()

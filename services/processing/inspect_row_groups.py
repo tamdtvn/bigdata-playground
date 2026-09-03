@@ -1,8 +1,8 @@
 import pyarrow.parquet as pq
 
 # path = "/output/partitioning/non_partitioned/orders.parquet"
-# path = "/output/pushdown/orders.parquet"
-path = "/output/pushdown_sorted/orders.parquet"
+path = "/output/pushdown/orders.parquet"
+# path = "/output/pushdown_sorted/orders.parquet"
 
 parquet_file = pq.ParquetFile(path)
 

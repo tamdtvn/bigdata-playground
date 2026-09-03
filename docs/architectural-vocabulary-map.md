@@ -289,6 +289,7 @@
        └── Partition granularity
               └── Parallelism ↔ Overhead trade-off
 
+
        Spark Application
        │
        ├── Coordinate execution
@@ -310,4 +311,59 @@
               └── Job
                      └── Stage
                             └── Task
-                                   └── Partition              
+                                   └── Partition    
+
+
+       Distributed Aggregation
+       │
+       ├── Independent local work
+       │      └── Partial Aggregation
+       │
+       ├── Related data must meet
+       │      └── Shuffle
+       │           └── Exchange
+       │
+       ├── Execution boundary
+       │      └── Stage
+       │
+       ├── Combine related data
+       │      └── Final Aggregation
+       │
+       └── Runtime optimization
+              └── Adaptive Query Execution [AQE]
+                     │
+                     └── Coalesce small partitions       
+
+
+       Distributed Processing
+       │
+       ├── Divide work
+       │     └── Processing Partition
+       │           └── Task
+       │                 └── Worker / Executor
+       │
+       ├── Execute simultaneously
+       │     └── Parallelism
+       │
+       ├── Uneven work
+       │     └── Data Skew
+       │           └── Straggler
+       │
+       ├── Cross-partition dependency
+       │     └── Wide Dependency
+       │           └── Shuffle
+       │                 └── Stage
+       │
+       ├── Local dependency
+       │     └── Narrow Dependency
+       │
+       ├── Reduce data movement
+       │     └── Partial Aggregation
+       │
+       ├── Runtime optimization
+       │     └── AQE
+       │
+       └── Failure recovery
+              ├── Task Attempt
+              ├── Retry
+              └── Lineage                                                        

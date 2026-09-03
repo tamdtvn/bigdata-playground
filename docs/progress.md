@@ -1,4 +1,8 @@
-2026-08-01
+# BIG DATA SANDBOX PROGRESS
+
+## = 2026-08-01
+Sprint 0
+└── Project Foundation
 
 Completed
 - Repository
@@ -8,12 +12,6 @@ Completed
 
 Lessons Learned
 - Repository should be organized before coding.
-
------------------------------------------------------------------
-
-## = 2026-08-01
-Sprint 0
-└── Project Foundation
 
 ## = 2026-08-16
 
@@ -80,9 +78,7 @@ Sprint 3 — Data Storage & Processing Foundations
 
 ## = 2026-08-31    
 
-### Sprint 4: 5 sessions
-
-Sprint 4 — Distributed Processing Foundations
+### Sprint 4 — Distributed Processing Foundations
 
 Session 16 — Why Distributed Processing?
              Partition → Task → Worker
@@ -98,3 +94,22 @@ Session 19 — Failure & Parallelism
 
 Session 20 — Sprint Review
              Single Machine vs Distributed Processing
+
+
+
+### SPRINT 5 — DATA PIPELINE ORCHESTRATION
+
+Session 21 — Why Orchestration?
+             Manual Pipeline → Dependency Problem
+
+Session 22 — DAG Fundamentals
+             Task → Dependency → Upstream / Downstream
+
+Session 23 — Scheduling & Idempotency
+             Retry → Backfill → Rerun
+
+Session 24 — Pipeline State & Observability
+             Success → Failed → Running → History
+
+Session 25 — Sprint Review
+             From Scripts → Reliable Data Pipeline

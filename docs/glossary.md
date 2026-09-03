@@ -295,3 +295,62 @@ Spark's selected execution strategy for performing a computation.
 
 ## Column Pruning
 Reading only the columns required by a query.
+
+## Shuffle
+Redistribution of data between processing partitions so related
+data can be processed together.
+
+## Exchange
+A Spark physical-plan operator representing redistribution of data,
+commonly indicating a Shuffle.
+
+## Partial Aggregation
+Aggregating data locally before redistribution to reduce the amount
+of data that must be moved.
+
+## Final Aggregation
+Combining partial aggregation results after related data has been
+redistributed.
+
+## Stage
+A group of tasks that can execute without crossing the next
+Shuffle boundary.
+
+## Adaptive Query Execution (AQE)
+Spark's ability to adjust an execution plan using statistics observed
+during execution.
+
+## Coalesce
+Combine small processing partitions into fewer larger partitions to
+reduce unnecessary execution overhead.
+
+## Task Attempt
+One execution attempt of a Task. A failed Task may have another attempt.
+
+## Lineage
+Dependency information describing how computation can be reconstructed
+from previous data and transformations.
+
+## Narrow Dependency
+A dependency where an output partition depends on a limited corresponding
+set of input partitions, allowing work to remain mostly local.
+
+## Wide Dependency
+A dependency where an output partition depends on data from multiple
+input partitions, commonly requiring Shuffle.
+
+## Recovery Granularity
+The smallest practical unit of work that can be recovered or recomputed
+after failure.
+
+## Straggler
+A task that takes significantly longer than peer tasks and delays
+overall job completion.
+
+## Amdahl's Law
+The principle that the non-parallelizable portion of a workload
+limits the benefit obtainable from additional parallelism.
+
+## Problem-driven Architecture
+Choosing architecture and technology based on demonstrated problems,
+constraints and quality attributes rather than technology preference.
