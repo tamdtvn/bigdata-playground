@@ -354,3 +354,24 @@ limits the benefit obtainable from additional parallelism.
 ## Problem-driven Architecture
 Choosing architecture and technology based on demonstrated problems,
 constraints and quality attributes rather than technology preference.
+
+## Execution Dependency
+A relationship where one task requires another task to complete
+successfully before it can run.
+
+## Upstream
+A task or dataset that another task depends on.
+
+## Downstream
+A task or dataset that depends on previous work.
+
+## DAG
+Directed Acyclic Graph: a directed dependency graph with no cycles.
+
+## Cycle
+A dependency loop where tasks eventually depend back on themselves,
+preventing a valid execution order.
+
+## Orchestration
+Coordination of tasks including dependencies, execution order,
+scheduling, state and failure handling.
