@@ -344,8 +344,7 @@ The smallest practical unit of work that can be recovered or recomputed
 after failure.
 
 ## Straggler
-A task that takes significantly longer than peer tasks and delays
-overall job completion.
+A task that takes significantly longer than peer tasks and delays overall job completion.
 
 ## Amdahl's Law
 The principle that the non-parallelizable portion of a workload
@@ -356,8 +355,7 @@ Choosing architecture and technology based on demonstrated problems,
 constraints and quality attributes rather than technology preference.
 
 ## Execution Dependency
-A relationship where one task requires another task to complete
-successfully before it can run.
+A relationship where one task requires another task to complete successfully before it can run.
 
 ## Upstream
 A task or dataset that another task depends on.
@@ -369,9 +367,87 @@ A task or dataset that depends on previous work.
 Directed Acyclic Graph: a directed dependency graph with no cycles.
 
 ## Cycle
-A dependency loop where tasks eventually depend back on themselves,
-preventing a valid execution order.
+A dependency loop where tasks eventually depend back on themselves, preventing a valid execution order.
 
 ## Orchestration
-Coordination of tasks including dependencies, execution order,
-scheduling, state and failure handling.
+Coordination of tasks including dependencies, execution order, scheduling, state and failure handling.
+
+## Fan-out
+A workflow pattern where one upstream task enables multiple downstream branches.
+
+## Fan-in
+A workflow pattern where multiple upstream branches converge into one downstream task.
+
+## Topological Order
+A sequential ordering of DAG tasks that respects all dependency relationships.
+
+## Critical Path
+The longest dependency path through a workflow, 
+determining the minimum possible completion time under ideal resource availability.
+
+## Task State
+The current execution condition of a workflow task, 
+such as WAITING, READY, RUNNING, SUCCESS or FAILED.
+
+## Data Interval
+The logical time range of data processed by a pipeline run.
+
+## Execution Time
+The time at which a pipeline run is triggered or executed.
+
+## Execution Duration
+The amount of time a pipeline run or task takes to complete.
+
+## Backfill
+Executing a pipeline for a historical data interval that was missed or needs rebuilding.
+
+## Idempotency
+The property that repeated execution for the same logical input does not corrupt or duplicate the logical result.
+
+## Race Condition
+A situation where concurrent operations interact with shared state and the final result depends on their execution timing.
+
+## Concurrency Control
+Rules or mechanisms controlling simultaneous executions that may operate on the same resources or logical data.
+
+## Pipeline Run
+A specific execution instance of a pipeline definition.
+
+## Task Instance
+A specific execution of a task within a particular pipeline run.
+
+## State Machine
+A model describing valid execution states and transitions between them.
+
+## Observability
+The ability to understand internal system behavior from evidence exposed by the system.
+
+## Execution History
+Historical records describing pipeline runs, task executions, states, timing and failures.
+
+## Correlation ID
+An identifier used to connect evidence belonging to the same logical execution or request.
+
+## MTTR
+Mean Time To Recovery: the time required to restore normal operation after a failure.
+
+## Hard Constraint
+A requirement that a candidate must satisfy to remain a feasible option.
+
+## Feasibility
+Whether a solution can work under the system's constraints.
+
+## Suitability
+How well a feasible solution fits the system's requirements and quality attributes.
+
+## Weighted Decision Matrix
+A decision-support method that compares candidates using criteria with
+different levels of importance.
+
+## Complexity Tax
+The ongoing cost introduced by capabilities, infrastructure or abstractions,
+including learning, operation, maintenance and troubleshooting.
+
+## Ecosystem Maturity
+The long-term health and supportability of a technology ecosystem,
+including community, maintenance, documentation and integrations.

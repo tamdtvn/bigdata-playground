@@ -13,6 +13,8 @@ Completed
 Lessons Learned
 - Repository should be organized before coding.
 
+
+
 ## = 2026-08-16
 
 ### Sprint 1: 5 sessions
@@ -33,6 +35,8 @@ Sprint 1 – Docker Foundation
 │
 └── Session 5
     └── Docker Network & Compose
+
+
 
 ## = 2026-08-16
 
@@ -55,6 +59,8 @@ Sprint 2 – Data Engineering Foundation
 └── Session 10
     └── Architecture Review & Ingestion Performance
 
+
+
 ## = 2026-08-22
 
 ### Sprint 3: 5 sessions
@@ -75,6 +81,8 @@ Sprint 3 — Data Storage & Processing Foundations
 │
 └── Session 15
     └── Sprint Review & Scaling Foundations   
+
+
 
 ## = 2026-08-31    
 
@@ -113,3 +121,17 @@ Session 24 — Pipeline State & Observability
 
 Session 25 — Sprint Review
              From Scripts → Reliable Data Pipeline
+
+
+### SPRINT 6 — REAL WORKFLOW ORCHESTRATION
+
+Session 26 — Our Requirements → Evaluate Orchestration Technologies
+
+Session 27 — First Real DAG
+
+Session 28 — Scheduling + Retry + Backfill Experiment
+
+Session 29 — Failure + State + Observability Experiment
+
+Session 30 — Architecture Review
+             Manual Pipeline → Production-like Data Platform
