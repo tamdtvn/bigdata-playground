@@ -52,5 +52,20 @@ services:
       - ../services/spark:/app
     working_dir: /app  
 
+  airflow:
+    build:
+      context: ../services/airflow
+    command: standalone
+    ports:
+      - "8080:8080"
+    volumes:
+      - ../services/airflow/dags:/opt/airflow/dags
+      - ../services/processing:/processing:ro
+      - ../data/lake/raw:/lake/raw:ro
+      - ../data/lake/cleaned:/lake/cleaned
+      - ../data/lake/curated:/lake/curated
+      - airflow_data:/opt/airflow
+
 volumes:
   postgres-data:
+  airflow_data:
