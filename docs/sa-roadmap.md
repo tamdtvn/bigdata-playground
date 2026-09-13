@@ -11,3 +11,37 @@
     - “Đây là hệ thống tôi phân tích. Đây là constraints. Đây là architecture decision. Đây là trade-off. Đây là implementation. Và đây là kết quả đo được.”
 
     - Automation Platform đang dần trở thành evidence kiểu này. Big Data Sandbox có thể bổ sung phần distributed/data architecture mà môi trường công ty hiện tại khó cung cấp.
+
+# DREAM
+
+                    DATA SOURCES
+
+           ILOSTAT   Job Data   Education
+              │         │           │
+              └─────────┼───────────┘
+                        ▼
+
+                   DATA LAKE
+                        │
+             ┌──────────┴──────────┐
+             │                     │
+            Raw                 Cleaned
+             │                     │
+             └──────────┬──────────┘
+                        ▼
+                     Curated
+                        │
+                        ▼
+               DATA WAREHOUSE
+                        │
+              Integrated Labour
+                Market Model
+                        │
+          ┌─────────────┼─────────────┐
+          ▼             ▼             ▼
+      Student        Workforce     University
+      Data Mart       Data Mart     Data Mart
+          │             │             │
+          ▼             ▼             ▼
+      Student        Business      University
+      Product        Product       Product

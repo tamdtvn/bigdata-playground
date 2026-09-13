@@ -33,17 +33,34 @@
 # big_data_playground()
 
 from airflow.sdk import dag, task
-from datetime import datetime
+from datetime import datetime, timedelta
 import subprocess
 
 
 @dag(
     dag_id="big_data_playground",
-    schedule=None,
+    schedule="*/5 * * * *",
     start_date=datetime(2026, 1, 1),
     catchup=False,
 )
 def big_data_playground():
+
+    @task(
+        retries=2,
+        retry_delay=timedelta(seconds=10),
+    )
+    def transient_failure_test():
+        from airflow.sdk import get_current_context
+
+        context = get_current_context()
+        task_instance = context["ti"]
+
+        print(f"Try number: {task_instance.try_number}")
+
+        if task_instance.try_number == 1:
+            raise RuntimeError("Intentional transient failure")
+
+        print("Recovered successfully.")
 
     @task
     def build_cleaned_orders():
@@ -59,10 +76,12 @@ def big_data_playground():
             check=True,
         )
 
+    retry_test = transient_failure_test()
     cleaned = build_cleaned_orders()
     curated = build_revenue_curated()
 
-    cleaned >> curated
+    # cleaned >> curated
+    retry_test >> cleaned >> curated
 
 
 big_data_playground()

@@ -275,3 +275,29 @@ Decision order:
     Scale Out only when justified
 
 Technology must justify itself by the problem it solves.
+
+## DATA LAKE 
+= Kho nguyên liệu
+
+Raw
+→ rau/thịt vừa nhập về
+
+Cleaned
+→ đã rửa, phân loại, chuẩn hóa
+
+Curated
+→ nguyên liệu/món đã chuẩn bị
+   cho nhu cầu cụ thể
+
+## DATA WAREHOUSE 
+= Siêu thị được tổ chức theo một business model rõ ràng
+
+DATA MART
+=
+Một khu chuyên biệt trong siêu thị
+
+Student Mart
+→ khu dành cho Student
+
+Workforce Mart
+→ khu dành cho Business

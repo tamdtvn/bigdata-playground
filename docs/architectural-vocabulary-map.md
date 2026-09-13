@@ -366,4 +366,189 @@
        └── Failure recovery
               ├── Task Attempt
               ├── Retry
-              └── Lineage                                                        
+              └── Lineage    
+
+## Week 3 - 07/09/2026                                                                  
+
+       Architectural Vocabulary Map
+       │
+       ├── Data Storage & Query Optimization
+       │     │
+       │     ├── Store efficiently
+       │     │     └── Parquet
+       │     │           ├── Columnar Storage
+       │     │           └── Row Group
+       │     │
+       │     ├── Read only relevant partitions
+       │     │     └── Partition Pruning
+       │     │
+       │     ├── Read only relevant blocks
+       │     │     └── Data Skipping
+       │     │           └── Row Group Statistics
+       │     │
+       │     ├── Read only relevant columns
+       │     │     └── Column Pruning
+       │     │
+       │     └── Push filtering closer to storage
+       │           └── Predicate Pushdown
+       │
+       ├── Data Lake
+       │     │
+       │     ├── Preserve source truth
+       │     │     └── Raw
+       │     │
+       │     ├── Validate before trust
+       │     │     ├── Data Contract
+       │     │     └── Cleaned
+       │     │
+       │     ├── Serve business needs
+       │     │     └── Curated
+       │     │           └── Data Product
+       │     │
+       │     ├── Rebuild from source
+       │     │     └── Reprocessability
+       │     │
+       │     └── Publish safely
+       │           └── Atomic Publish
+       │
+       ├── Distributed Processing
+       │     │
+       │     ├── Divide work
+       │     │     └── Processing Partition
+       │     │           └── Task
+       │     │                 └── Worker / Executor
+       │     │
+       │     ├── Execute simultaneously
+       │     │     └── Parallelism
+       │     │
+       │     ├── Uneven work
+       │     │     └── Data Skew
+       │     │           └── Straggler
+       │     │
+       │     ├── Cross-partition dependency
+       │     │     └── Wide Dependency
+       │     │           └── Shuffle
+       │     │                 └── Stage
+       │     │
+       │     ├── Local dependency
+       │     │     └── Narrow Dependency
+       │     │
+       │     ├── Reduce data movement
+       │     │     └── Partial Aggregation
+       │     │
+       │     ├── Runtime optimization
+       │     │     └── AQE
+       │     │           └── Coalesce
+       │     │
+       │     └── Failure recovery
+       │           ├── Task Attempt
+       │           ├── Retry
+       │           ├── Lineage
+       │           └── Recovery Granularity
+       │
+       ├── Scaling
+       │     │
+       │     ├── Add resources to one machine
+       │     │     └── Scale Up
+       │     │
+       │     ├── Add machines / workers
+       │     │     └── Scale Out
+       │     │
+       │     ├── Required completion target
+       │     │     └── SLA
+       │     │
+       │     └── Limit of parallel speedup
+       │           └── Amdahl's Law
+       │
+       └── Workflow Orchestration
+       │
+       ├── Describe workflow structure
+       │     └── DAG
+       │           │
+       │           ├── Work unit
+       │           │     └── Task
+       │           │
+       │           ├── Execution relationship
+       │           │     └── Dependency
+       │           │           ├── Upstream
+       │           │           └── Downstream
+       │           │
+       │           ├── Split execution paths
+       │           │     └── Fan-out
+       │           │
+       │           ├── Join execution paths
+       │           │     └── Fan-in
+       │           │
+       │           └── Valid execution ordering
+       │                 └── Topological Order
+       │
+       ├── Determine workflow completion time
+       │     └── Critical Path
+       │
+       ├── Describe instead of manually execute
+       │     └── Declarative Workflow
+       │
+       ├── Execute workflow
+       │     ├── Pipeline Run / DAG Run
+       │     └── Task Instance
+       │
+       ├── Track execution lifecycle
+       │     └── Task State
+       │           ├── WAITING
+       │           ├── READY
+       │           ├── RUNNING
+       │           ├── SUCCESS
+       │           └── FAILED
+       │
+       ├── Run at the right time
+       │     └── Scheduling
+       │           │
+       │           ├── When execution starts
+       │           │     └── Execution Time
+       │           │
+       │           └── Which data period it represents
+       │                 └── Data Interval
+       │
+       ├── Recover execution
+       │     ├── Retry
+       │     ├── Idempotency
+       │     └── Backfill
+       │
+       ├── Prevent conflicting executions
+       │     └── Concurrency Control
+       │           └── Race Condition
+       │
+       ├── Understand what happened
+       │     └── Observability
+       │           ├── State
+       │           ├── Logs
+       │           ├── Metrics
+       │           ├── Execution History
+       │           └── Correlation ID
+       │
+       ├── Separate coordination from processing
+       │     ├── Control Plane
+       │     └── Data Plane
+       │
+       └── Connect orchestrator to processing
+              └── Execution Contract
+                     └── Failure Propagation
+
+
+       Analytical Data Architecture
+       │
+       ├── Flexible data storage
+       │     └── Data Lake
+       │           ├── Raw
+       │           ├── Cleaned
+       │           └── Curated
+       │                 └── Data Product
+       │
+       ├── Integrated analytical model
+       │     └── Data Warehouse
+       │
+       ├── Domain / consumer-specific analytics
+       │     └── Data Mart
+       │
+       └── Lake + warehouse capabilities
+       └── Lakehouse                     

@@ -451,3 +451,30 @@ including learning, operation, maintenance and troubleshooting.
 ## Ecosystem Maturity
 The long-term health and supportability of a technology ecosystem,
 including community, maintenance, documentation and integrations.
+
+## Declarative Workflow
+A workflow that describes task dependencies and intent instead of manually coding execution order.
+
+## Control Plane
+The orchestration layer that decides what should run, when, and under which conditions.
+
+## Data Plane
+The processing layer that actually reads, transforms, and writes data.
+
+## Execution Contract
+The interface through which an orchestrator determines whether an external job succeeded or failed.
+
+## Logical Boundary
+A separation of responsibilities in design that does not necessarily require separate physical deployment.
+
+## Data Lake 
+Nơi lưu và xử lý dữ liệu linh hoạt từ raw đến business-ready.
+
+## Data Warehouse 
+Dữ liệu được tích hợp và model hóa để phục vụ analytics/business reporting.
+
+## Data Mart 
+Một phần analytical data tập trung cho một domain hoặc nhóm consumer cụ thể.
+
+## Lakehouse 
+Đưa các khả năng quản lý/query kiểu warehouse lên nền storage linh hoạt kiểu lake.
