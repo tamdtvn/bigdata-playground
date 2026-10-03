@@ -301,3 +301,63 @@ Student Mart
 
 Workforce Mart
 → khu dành cho Business
+
+
+## Pipeline Orchestration — Session 28
+
+### Current Architecture
+
+Airflow orchestrates the Raw → Cleaned → Curated pipeline.
+
+Responsibilities:
+
+- Airflow: scheduling, dependencies, task state, and retry.
+- Processing jobs: reading, validation, transformation, and writing.
+- Data Lake: storage of raw, cleaned, and curated datasets.
+
+The current processing scripts process the complete dataset and publish shared output files.
+
+### Validated Capabilities
+
+- Automatic scheduling.
+- Task-level retry.
+- Creation of independent historical DAG Runs.
+
+### Identified Gap
+
+The processing jobs do not currently accept a business date or data interval.
+
+Therefore, Airflow can create historical runs, but the current processing code cannot yet guarantee that each run processes and publishes only its corresponding historical data.
+
+### Proposed Evolution
+
+```text
+Airflow DAG Run
+    |
+    | business_date
+    v
+Date-aware Processing Job
+    |
+    | process only the requested date
+    v
+Validate Output
+    |
+    v
+Atomic Publish
+    |
+    v
+Curated/date=YYYY-MM-DD/
+```
+
+The proposed design aligns execution, processing, and output boundaries.
+
+### Design Considerations
+
+- Retry and backfill should be safe for repeated execution.
+- Output replacement should not expose incomplete data.
+- Partition granularity should reflect workload and data volume.
+- A daily partition is a candidate for daily revenue recovery, not a universal partitioning rule.
+
+### Status
+
+The proposed date-aware processing and atomic publishing mechanisms have not yet been implemented or validated.

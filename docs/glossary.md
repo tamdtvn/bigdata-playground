@@ -478,3 +478,33 @@ Một phần analytical data tập trung cho một domain hoặc nhóm consumer 
 
 ## Lakehouse 
 Đưa các khả năng quản lý/query kiểu warehouse lên nền storage linh hoạt kiểu lake.
+
+## Business Date
+The date of the business data that a processing job is responsible for, which may differ from the date when the job actually runs.
+
+## Date-aware Processing
+Processing that explicitly uses a supplied business date or data interval to determine which data to read and produce.
+
+## Aligned Recovery Boundaries
+Designing execution, processing, and output boundaries consistently so that failed or historical work can be reprocessed independently.
+
+## Partition-scoped Publishing
+Publishing or replacing only the output partition associated with the business scope being processed.
+
+## Failure Propagation
+The effect of an upstream failure on downstream execution.
+
+## Failure Localization
+Identifying the smallest relevant execution boundary where a failure actually occurred.
+
+## Diagnostic Evidence
+Execution information such as state, attempts, metrics, and logs used to investigate and verify a failure.
+
+## Upstream Failed
+A task state indicating that the task did not execute because a required upstream dependency failed.
+
+## Retry Exhaustion
+The condition where all configured retry attempts have been used and the task remains unsuccessful.
+
+## MTTR — Mean Time To Recovery / Repair
+A measure of how long it takes to recover from a failure; good observability can help reduce investigation and recovery time.

@@ -4,8 +4,7 @@
 
 ### Goal
 
-Understand the fundamental distributed-processing model before
-introducing a framework such as Spark.
+Understand the fundamental distributed-processing model before introducing a framework such as Spark.
 
 ### Mental Model
 

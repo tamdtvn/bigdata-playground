@@ -186,3 +186,219 @@ Data Lake:
 - [x] Real processing integrated
 - [x] Real Data Lake outputs created
 - [x] Control Plane vs Data Plane understood
+
+
+## Session 28 — Scheduling, Retry & Backfill
+
+### Goal
+
+Validate Airflow scheduling, task-level retry, and historical backfill through controlled experiments.
+
+### Experiments & Evidence
+
+**1. Scheduling**
+
+- Changed the main DAG schedule from `None` to `*/5 * * * *`.
+- Airflow automatically created scheduled DAG Runs without manual triggering.
+- Confirmed that scheduling responsibility moved from the human operator to Airflow.
+
+**2. Retry**
+
+- Added a test task that intentionally failed on its first attempt.
+- Configured `retries=2` and a 10-second retry delay.
+- The task succeeded on its second attempt.
+- Downstream processing tasks continued, and the DAG Run completed successfully.
+
+**3. Backfill**
+
+- Created a separate `backfill_experiment` DAG with a daily schedule.
+- Requested a backfill for September 8–10, 2026.
+- Airflow created three independent historical DAG Runs:
+
+  - `backfill__2026-09-08T00:00:00+00:00`
+  - `backfill__2026-09-09T00:00:00+00:00`
+  - `backfill__2026-09-10T00:00:00+00:00`
+
+- Each run had its own task instance and execution logs.
+- In the observed backfill runs, `data_interval_start` and `data_interval_end` were both equal to the corresponding logical date.
+
+### Architectural Findings
+
+- Scheduling, retry, and backfill are orchestration capabilities.
+- Safe retry requires idempotent processing.
+- The current processing scripts are not data-interval-aware: historical runs would still process the entire dataset.
+- A future processing contract should explicitly identify the business date or data interval to process.
+- Partition-scoped outputs can limit the amount of work required for retry and backfill.
+- Atomic publishing is needed to protect existing valid outputs during replacement.
+
+### Proposed Design — Not Yet Implemented
+
+```text
+Airflow DAG Run
+    ↓
+Explicit Business Date
+    ↓
+Date-aware Processing
+    ↓
+Validate
+    ↓
+Atomic Publish
+    ↓
+Curated/date=YYYY-MM-DD/
+```
+
+### Key Principle
+
+**Orchestration can retry or backfill work, but processing must understand the correct business scope and support safe re-execution.**
+
+### Definition of Done
+
+- [x] Automatic scheduling demonstrated.
+- [x] Task-level retry demonstrated.
+- [x] Three independent historical DAG Runs created.
+- [x] Temporal execution behavior observed in logs.
+- [x] Processing contract limitation identified.
+- [x] Partition-scoped publishing design discussed.
+- [ ] Date-aware processing implemented (future work).
+- [ ] Atomic publishing implemented and tested (future work).
+
+## Session 29 — Failure, State & Observability
+
+### Goal
+
+Learn how execution state and diagnostic evidence help localize a pipeline failure before investigating its root cause.
+
+### Experiment
+
+Created a controlled Airflow DAG:
+
+```text
+extract_data
+    ↓
+transform_data
+    ↓
+publish_data
+```
+
+`extract_data` intentionally raised:
+
+```text
+FileNotFoundError:
+/lake/raw/ilostat/input.csv does not exist
+```
+
+The task was configured with:
+
+```text
+retries = 2
+```
+
+### Prediction
+
+- `extract_data` would execute three attempts.
+- After retry exhaustion, `extract_data` would fail.
+- Downstream tasks would not execute because their upstream dependency did not succeed.
+- Investigation should start by localizing the failed task before reading detailed logs.
+
+### Evidence
+
+Observed DAG state:
+
+```text
+DAG Run             FAILED
+
+extract_data         FAILED
+    Try Number       3
+
+transform_data       UPSTREAM FAILED
+    Try Number       0
+
+publish_data         UPSTREAM FAILED
+    Try Number       0
+```
+
+The final `extract_data` attempt reported:
+
+```text
+Try number: 3
+
+FileNotFoundError:
+/lake/raw/ilostat/input.csv does not exist
+```
+
+### Evidence Ladder
+
+```text
+DAG FAILED
+    ↓
+Which task failed?
+    ↓
+extract_data
+    ↓
+How many attempts?
+    ↓
+3
+    ↓
+What happened?
+    ↓
+FileNotFoundError
+    ↓
+Which resource?
+    ↓
+/lake/raw/ilostat/input.csv
+    ↓
+Root Cause
+Expected input file does not exist
+```
+
+### Findings
+
+`FAILED` and `UPSTREAM FAILED` represent different situations:
+
+```text
+FAILED
+→ The task executed and failed.
+
+UPSTREAM FAILED
+→ The task did not execute because an upstream dependency failed.
+```
+
+Retry history also provides diagnostic evidence. Repeated identical failures may indicate a deterministic or permanent problem, although this must still be verified.
+
+### Mental Model
+
+```text
+Something is wrong
+        ↓
+State
+        ↓
+Failure Location
+        ↓
+Attempts
+        ↓
+Logs
+        ↓
+Verify Evidence
+        ↓
+Root Cause
+```
+
+### Key Principles
+
+**Localize the failure before diagnosing the cause.**
+
+**Observability reduces the search space between symptom and cause.**
+
+**Retry is a recovery mechanism, not a repair mechanism.**
+
+### Definition of Done
+
+- [x] Permanent failure created intentionally.
+- [x] Retry exhaustion observed.
+- [x] Three attempts verified.
+- [x] Failure propagation observed.
+- [x] `FAILED` vs `UPSTREAM FAILED` distinguished.
+- [x] Failure localized from DAG → Task → Attempt → Log.
+- [x] Root cause identified from evidence.
+
+**Status:** Session 29 completed.
