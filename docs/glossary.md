@@ -508,3 +508,18 @@ The condition where all configured retry attempts have been used and the task re
 
 ## MTTR — Mean Time To Recovery / Repair
 A measure of how long it takes to recover from a failure; good observability can help reduce investigation and recovery time.
+
+## Technology Hypothesis
+A hypothesis that a technology can satisfy specific architectural requirements, which should be validated through evidence.
+
+## Decision Context
+The requirements, constraints and environment within which an architecture decision is considered valid.
+
+## Coordination Complexity
+The complexity created by coordinating multiple jobs, dependencies, schedules, states, retries and historical executions.
+
+## Control Plane
+The part of the system responsible for coordinating execution, state and operational decisions rather than processing business data directly.
+
+## Data Plane
+The part of the system that performs the actual data reading, validation, transformation and writing.

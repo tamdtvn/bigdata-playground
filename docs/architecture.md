@@ -361,3 +361,78 @@ The proposed design aligns execution, processing, and output boundaries.
 ### Status
 
 The proposed date-aware processing and atomic publishing mechanisms have not yet been implemented or validated.
+
+## Session 30
+
+### Workflow Orchestration
+
+Apache Airflow is the accepted workflow orchestrator for the Big Data Playground.
+
+```text
+                 Airflow
+              Control Plane
+                   │
+      ┌────────────┼────────────┐
+      │            │            │
+ Dependency    Scheduling    State/Recovery
+      │            │            │
+      └────────────┼────────────┘
+                   ↓
+              Processing
+               Data Plane
+                   ↓
+                Data Lake
+```
+
+Airflow is responsible for workflow coordination.
+
+Processing jobs remain responsible for reading, validating, transforming and publishing data.
+
+See:
+
+`ADR-003-airflow-orchestration.md`
+
+### Current Limitations
+
+The current walking skeleton does not yet provide:
+
+- business-date-aware processing;
+- atomic publishing;
+- production-grade authentication;
+- high availability;
+- centralized monitoring and alerting.
+
+These capabilities are intentionally deferred until justified by real system requirements.
+
+# Final Architecture Summary
+
+The final Big Data Playground architecture is a **walking skeleton**, not a production platform.
+
+```mermaid
+flowchart TD
+    BW["Business Workload"]
+
+    subgraph ORCH["Orchestration — Control Plane"]
+        AF["Apache Airflow"]
+        CAP["Dependency · Scheduling · State<br/>Retry · Backfill · Execution Evidence"]
+        AF --> CAP
+    end
+
+    subgraph PROC["Processing — Data Plane"]
+        PY["Python"]
+        SP["Spark — when justified"]
+    end
+
+    subgraph LAKE["Data Lake"]
+        RAW["Raw<br/>Preserve source truth"]
+        CLEAN["Cleaned<br/>Validate and normalize"]
+        CURATED["Curated<br/>Business-ready data"]
+        RAW --> CLEAN --> CURATED
+    end
+
+    DP["Data Product"]
+
+    BW --> ORCH
+    ORCH --> PROC
+    PROC --> LAKE
+    LAKE --> DP

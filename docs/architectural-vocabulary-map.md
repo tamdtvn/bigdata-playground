@@ -551,4 +551,22 @@
        │     └── Data Mart
        │
        └── Lake + warehouse capabilities
-       └── Lakehouse                     
+       └── Lakehouse      
+         
+
+       Technology Decision
+       │
+       ├── Why might it work?
+       │     └── Technology Hypothesis
+       │
+       ├── Does it work?
+       │     └── PoC → Experiment → Evidence
+       │
+       ├── What do we gain?
+       │     └── Quality Attributes / Capabilities
+       │
+       ├── What do we pay?
+       │     └── Trade-off
+       │
+       └── Where is the decision valid?
+       └── Decision Context             

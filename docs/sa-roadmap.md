@@ -1,18 +1,67 @@
-# MOST IMPORTANT GAPS
+## Big Data Playground — Completed
 
-## There are 3 GAPs.
+The Big Data Playground is complete.
 
-* Gap 1 — Breadth. Bạn đã có chiều sâu khá tốt ở application architecture và automation architecture, nhưng Software Architect cần gặp thêm distributed systems, messaging, consistency, failure, caching, scalability, observability, cloud...
+The goal of the Playground was not to build a production-ready Big Data platform.
 
-* Gap 2 — Vocabulary. Có những lúc bạn đã suy nghĩ đúng một architectural concept nhưng chưa biết tên của nó. Ví dụ gần đây chúng ta nói về dependency direction rồi mới gắn nhãn Dependency Inversion. Đây thực ra là gap tương đối dễ sửa.
+Its purpose was to learn and validate the architectural skeleton behind:
 
-* Gap 3 — Production evidence. Đây là gap khó nhất. Bạn có thể thiết kế tốt, nhưng CV cho vị trí Architect sẽ mạnh hơn rất nhiều nếu có thể nói:
+- data ingestion;
+- analytical storage;
+- query optimization;
+- data lake architecture;
+- distributed processing;
+- workflow orchestration;
+- failure recovery and observability;
+- evidence-based architecture decisions.
 
-    - “Đây là hệ thống tôi phân tích. Đây là constraints. Đây là architecture decision. Đây là trade-off. Đây là implementation. Và đây là kết quả đo được.”
+The next learning phase moves from a learning-driven environment to a real problem-driven project:
 
-    - Automation Platform đang dần trở thành evidence kiểu này. Big Data Sandbox có thể bổ sung phần distributed/data architecture mà môi trường công ty hiện tại khó cung cấp.
+**ILOSTAT Career Data Platform**
 
-# DREAM
+Future technologies will not be introduced because they belong to a predefined Big Data stack.
+
+They will be introduced only when real requirements justify them.
+
+### Transition Principle
+
+```text
+Big Data Playground
+
+Concept
+ ↓
+Experiment
+ ↓
+Evidence
+ ↓
+Mental Model
+
+        TRANSITION
+
+ILOSTAT Career Data Platform
+
+Real Problem
+ ↓
+Requirements
+ ↓
+Quality Attributes
+ ↓
+Architecture Options
+ ↓
+Trade-offs
+ ↓
+Smallest Useful Decision
+ ↓
+Implementation
+ ↓
+Measurement
+ ↓
+Evidence
+ ↓
+Next Problem
+```
+
+```text
 
                     DATA SOURCES
 
@@ -45,3 +94,48 @@
           ▼             ▼             ▼
       Student        Business      University
       Product        Product       Product
+```
+
+## Big Data Playground — Completed
+
+The Big Data Playground is complete.
+
+The goal of the Playground was not to build a production-ready Big Data platform. Its purpose was to learn and validate the architectural foundations behind:
+
+- data ingestion;
+- analytical storage;
+- query optimization;
+- data lake architecture;
+- distributed processing;
+- workflow orchestration;
+- failure recovery and observability;
+- evidence-based architecture decisions.
+
+The next learning phase moves from a learning-driven environment to a real problem-driven project:
+
+**ILOSTAT Career Data Platform**
+
+Future technologies will not be introduced simply because they belong to a predefined Big Data stack. They will be introduced only when real requirements justify them.
+
+### Transition Principle
+
+```mermaid
+flowchart TD
+    A["Big Data Playground"] --> B["Concept"]
+    B --> C["Experiment"]
+    C --> D["Evidence"]
+    D --> E["Mental Model"]
+
+    E --> F["ILOSTAT Career Data Platform"]
+
+    F --> G["Real Problem"]
+    G --> H["Requirements"]
+    H --> I["Quality Attributes"]
+    I --> J["Architecture Options"]
+    J --> K["Trade-offs"]
+    K --> L["Smallest Useful Decision"]
+    L --> M["Implementation"]
+    M --> N["Measurement"]
+    N --> O["Evidence"]
+    O --> P["Next Problem"]
+```

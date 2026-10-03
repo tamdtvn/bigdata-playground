@@ -402,3 +402,142 @@ Root Cause
 - [x] Root cause identified from evidence.
 
 **Status:** Session 29 completed.
+
+## Session 30 — Architecture Review
+
+### Goal
+
+Review the orchestration architecture using evidence from Sessions 26–29 and decide whether Apache Airflow should be accepted for the Big Data Playground.
+
+### Initial Problem
+
+Before introducing an orchestrator, the processing pipeline already worked:
+
+```text
+Raw
+ ↓
+build_cleaned_orders.py
+ ↓
+Cleaned
+ ↓
+build_revenue_curated.py
+ ↓
+Curated
+```
+
+However, execution knowledge remained with the human operator:
+
+- which job should run first;
+- when jobs should run;
+- whether an upstream job succeeded;
+- when a failed job should be retried;
+- which historical executions should be rerun.
+
+### Architecture Evolution
+
+```text
+                 ORCHESTRATION
+                      │
+        ┌─────────────┼─────────────┐
+        │             │             │
+   Dependency      Scheduling      State
+        │             │             │
+      Retry         Backfill    Observability
+        │             │             │
+        └─────────────┼─────────────┘
+                      ↓
+                  PROCESSING
+                      ↓
+                   STORAGE
+```
+
+Responsibilities are now separated:
+
+```text
+WHEN / ORDER / STATE
+        ↓
+Orchestration
+
+HOW TO TRANSFORM
+        ↓
+Processing
+
+WHERE DATA LIVES
+        ↓
+Storage
+```
+
+### Requirements vs Evidence
+
+| Requirement | Evidence |
+|---|---|
+| Dependency management | `cleaned >> curated` executed in dependency order |
+| Scheduling | Airflow automatically created scheduled DAG Runs |
+| State tracking | SUCCESS, FAILED and UPSTREAM FAILED observed |
+| Retry | Intentional transient failure recovered on retry |
+| Backfill | Three independent historical DAG Runs created |
+| Observability | Failure localized through DAG → Task → Attempt → Log |
+| Local/Docker friendly | Airflow 3.3.1 executed in the local Docker environment |
+
+### Quality Attribute Review
+
+**Reliability**
+
+Airflow demonstrated task-level retry and historical backfill.
+
+However:
+
+```text
+Airflow supports backfill
+        ≠
+Processing is backfill-correct
+```
+
+The current processing jobs are not yet business-date aware.
+
+**Observability**
+
+Airflow provides enough execution evidence for the walking skeleton to localize failures using task state, attempts and logs.
+
+Production monitoring, alerting and distributed tracing remain outside the current scope.
+
+**Maintainability**
+
+Workflow execution knowledge moved from human procedure into machine-readable DAG definitions.
+
+**Scalability**
+
+Airflow scales coordination rather than data computation.
+
+```text
+Spark   → scale computation
+Airflow → scale coordination
+```
+
+### Trade-off
+
+The primary accepted trade-off is additional infrastructure and operational cost.
+
+The local standalone environment hides some production operational concerns, so these costs must be reevaluated in a production context.
+
+### Decision
+
+Apache Airflow is accepted as the orchestration technology for the Big Data Playground.
+
+Airflow is also an initial candidate for ILOSTAT, but it is not automatically selected for that system.
+
+ILOSTAT must reevaluate the decision against its actual workload, coordination complexity, quality attributes and constraints.
+
+### Key Principles
+
+**Tool capability does not automatically imply system capability.**
+
+**Technology decisions are contextual, not transferable by default.**
+
+**Use an orchestrator when coordination complexity justifies its cost.**
+
+### Status
+
+Session 30 completed.
+
+Sprint 6 completed.
